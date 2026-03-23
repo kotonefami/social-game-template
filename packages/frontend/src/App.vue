@@ -1,15 +1,19 @@
 <template>
     <div class="safe-area-wrapper">
         <div class="app-container">
-            <h1>Frontend</h1>
+            <h1>{{ t("hello") }} Frontend</h1>
         </div>
     </div>
     <div class="app-container">
-        <h1>Frontend</h1>
+        <h1>{{ t("hello") }} Frontend</h1>
     </div>
 </template>
 
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import { useI18n } from "vue-i18n";
+
+const { t } = useI18n();
+</script>
 
 <style>
 #app {
