@@ -1,0 +1,27 @@
+{
+    "name": "frontend",
+    "version": "0.1.0",
+    "type": "module",
+    "scripts": {
+        "dev": "vite",
+        "build": "vue-tsc --noEmit && vite build",
+        "type-check": "vue-tsc --noEmit"
+    },
+    "dependencies": {
+        "vue": "3.5.30",
+        "workbox-core": "^7.4.0",
+        "workbox-expiration": "^7.4.0",
+        "workbox-precaching": "^7.4.0",
+        "workbox-routing": "^7.4.0",
+        "workbox-strategies": "^7.4.0"
+    },
+    "devDependencies": {
+        "@vitejs/plugin-vue": "6.0.5",
+        "openapi-fetch": "0.17.0",
+        "openapi-typescript": "7.13.0",
+        "typescript": "5.9.3",
+        "vite": "8.0.1",
+        "vite-plugin-pwa": "^1.2.0",
+        "vue-tsc": "3.2.6"
+    }
+}

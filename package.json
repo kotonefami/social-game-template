@@ -1,0 +1,31 @@
+{
+    "name": "social",
+    "version": "0.1.0",
+    "description": "Social Game Template",
+    "private": true,
+    "type": "module",
+    "workspaces": [
+        "packages/*"
+    ],
+    "scripts": {
+        "generate:openapi": "cargo run --manifest-path=packages/server/Cargo.toml --bin generate-openapi",
+        "generate:types": "cargo test --manifest-path=packages/types/Cargo.toml",
+        "generate:client": "openapi-typescript openapi.json -o packages/frontend/src/generated/api.d.ts",
+        "prebuild": "pnpm run generate:openapi && pnpm run generate:client && pnpm run generate:types",
+        "dev:server": "cargo run --bin server",
+        "dev:frontend": "pnpm --filter ./packages/frontend run dev",
+        "dev": "npm-run-all --parallel dev:server dev:frontend",
+        "build": "cargo build --release && pnpm --filter ./packages/frontend run build",
+        "format": "prettier --write \"packages/**/*.{ts,tsx,json,md}\"",
+        "format:check": "prettier --check \"packages/**/*.{ts,tsx,json,md}\"",
+        "type-check": "pnpm --filter ./packages/frontend run type-check"
+    },
+    "devDependencies": {
+        "@types/node": "25.5.0",
+        "npm-run-all": "^4.1.5",
+        "openapi-typescript": "7.13.0",
+        "prettier": "3.8.1",
+        "prettier-plugin-toml": "2.0.6",
+        "typescript": "5.9.3"
+    }
+}
