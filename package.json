@@ -9,7 +9,7 @@
     ],
     "scripts": {
         "generate:openapi": "cargo run --manifest-path=packages/server/Cargo.toml --bin generate-openapi",
-        "generate:types": "cargo test --manifest-path=packages/types/Cargo.toml",
+        "generate:types": "cargo test -p types -p logic",
         "generate:client": "openapi-typescript openapi.json -o packages/frontend/src/generated/api.d.ts",
         "prebuild": "pnpm run generate:openapi && pnpm run generate:client && pnpm run generate:types",
         "dev:server": "cargo run --bin server",
