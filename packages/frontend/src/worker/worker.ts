@@ -8,14 +8,29 @@ import { CacheFirst, NetworkFirst } from "workbox-strategies";
 
 precacheAndRoute(self.__WB_MANIFEST);
 
+/** 1日の秒数 */
+const DAYS = 24 * 60 * 60;
+
 registerRoute(
-    ({ url }) => url.pathname.startsWith("/assets/icons/"),
+    ({ url }) => url.pathname.startsWith("/assets/"),
     new CacheFirst({
-        cacheName: "icon-cache",
+        cacheName: "asset-cache",
         plugins: [
             new ExpirationPlugin({
-                maxEntries: 50, // 最大50件
-                maxAgeSeconds: 30 * 24 * 60 * 60, // 30日間キャッシュ
+                maxEntries: 50,
+                maxAgeSeconds: 30 * DAYS,
+            }),
+        ],
+    }),
+);
+registerRoute(
+    ({ url }) => url.hostname === "fonts.googleapis.com" || url.hostname === "fonts.gstatic.com",
+    new CacheFirst({
+        cacheName: "font-cache",
+        plugins: [
+            new ExpirationPlugin({
+                maxEntries: 50,
+                maxAgeSeconds: 30 * DAYS,
             }),
         ],
     }),

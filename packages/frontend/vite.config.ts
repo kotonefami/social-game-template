@@ -1,5 +1,6 @@
 import { defineConfig } from "vite";
 import vue from "@vitejs/plugin-vue";
+import { fileURLToPath, URL } from "node:url";
 import { VitePWA } from "vite-plugin-pwa";
 
 export default defineConfig({
@@ -15,27 +16,41 @@ export default defineConfig({
 
             registerType: "autoUpdate",
             strategies: "injectManifest",
-            includeAssets: ["favicon.ico", "apple-touch-icon.png", "masked-icon.svg"],
+            includeAssets: ["apple-touch-icon.webp"],
 
             // NOTE: PWA のマニフェストファイルの内容
             manifest: {
-                name: "Social Game",
+                name: "Social Game Template",
                 short_name: "Social",
-                description: "The description of your PWA",
+                description: "A template for social game PWA",
                 background_color: "#ffffff",
                 theme_color: "#ffffff",
                 orientation: "portrait",
                 lang: "ja",
                 icons: [
                     {
-                        src: "pwa-192x192.png",
-                        sizes: "192x192",
-                        type: "image/png",
+                        src: "/assets/icons/icon-128x128.webp",
+                        sizes: "128x128",
+                        type: "image/webp",
+                        purpose: "any",
                     },
                     {
-                        src: "pwa-512x512.png",
+                        src: "/assets/icons/icon-192x192.webp",
+                        sizes: "192x192",
+                        type: "image/webp",
+                        purpose: "any",
+                    },
+                    {
+                        src: "/assets/icons/icon-512x512.webp",
                         sizes: "512x512",
-                        type: "image/png",
+                        type: "image/webp",
+                        purpose: "any",
+                    },
+                    {
+                        src: "/assets/icons/icon-512x512-maskable.webp",
+                        sizes: "512x512",
+                        type: "image/webp",
+                        purpose: "maskable",
                     },
                 ],
             },
@@ -44,4 +59,9 @@ export default defineConfig({
             devOptions: { enabled: true, type: "module" },
         }),
     ],
+    resolve: {
+        alias: {
+            "@": fileURLToPath(new URL("./src", import.meta.url)),
+        },
+    },
 });
