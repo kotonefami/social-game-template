@@ -2,9 +2,16 @@ import { createI18n } from "vue-i18n";
 import { en } from "./locales/en.ts";
 import { ja } from "./locales/ja.ts";
 
+export type MessageSchema = typeof ja;
+
+declare module "vue-i18n" {
+    export interface DefineLocaleMessage extends MessageSchema {}
+}
+
 const messages = {
     en,
     ja,
+    "en-US": en,
 };
 
 const i18n = createI18n({
