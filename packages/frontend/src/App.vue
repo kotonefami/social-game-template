@@ -1,19 +1,70 @@
 <template>
     <div class="safe-area-wrapper">
         <div class="app-container">
-            <h1>{{ t("hello") }} Frontend</h1>
+            <h1>{{ t("tokens.screens.home") }}</h1>
+            <ActionButton :icon="HomeIcon" text="dialog.hello.title" primary @click="openHello" />
         </div>
     </div>
-    <div class="app-container">
-        <h1>{{ t("hello") }} Frontend</h1>
-    </div>
+    <DialogScreen />
 </template>
 
 <script setup lang="ts">
 import { useI18n } from "vue-i18n";
+import { Home as HomeIcon } from "@lucide/vue";
+import ActionButton from "./components/shared/ActionButton.vue";
+import DialogScreen from "./components/dialogs/DialogScreen.vue";
+import HelloDialog from "./components/dialogs/HelloDialog.vue";
+import { openDialog } from "./composables/useDialog";
 
 const { t } = useI18n();
+
+async function openHello() {
+    const result = await openDialog(HelloDialog);
+    console.log("HelloDialog closed with", result);
+}
 </script>
+
+<style lang="scss">
+:root {
+    --color-background: #fffae5;
+    --color-background-darken: #dad0ac;
+    --color-accent: #ffcc00;
+    --color-accent-hover: #ff9900;
+    --color-shadow: #80808080;
+    --color-panel-background: #ffffffa0;
+    --color-panel-background-hover: #ffffff;
+    --color-button-background: #b0b0b0;
+    --color-button-background-hover: #909090;
+}
+
+[data-v-app] {
+    position: absolute;
+    inset: 0;
+    background-color: var(--color-background);
+}
+
+:where(*, *::before, *::after) {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+:where(ul, ol) {
+    list-style: none;
+}
+
+:where(img, svg, video) {
+    display: block;
+    max-width: 100%;
+    pointer-events: none;
+}
+
+button,
+a,
+input {
+    -webkit-tap-highlight-color: transparent;
+}
+</style>
 
 <style>
 #app {
